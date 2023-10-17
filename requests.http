@@ -1,0 +1,5 @@
+# Post get all
+http://127.0.0.1:8000/api/posts
+
+# Api
+http://127.0.0.1:8000/api/
