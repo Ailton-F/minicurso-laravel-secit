@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\PostController;
-use App\Models\Post;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,10 +23,27 @@ Route::get('/', function (Request $request) {
     ],200);
 });
 
+Route::prefix('users')->group(function(){
+    Route::get('/', [UserController::class, 'list']);
+    Route::post('/', [UserController::class, 'create']);
+    Route::get('/{id}', [UserController::class, 'listById']);
+    Route::patch('/{id}', [UserController::class, 'edit']);
+    Route::delete('/{id}', [UserController::class, 'delete']);
+});
+
 Route::prefix('posts')->group(function(){
     Route::get('/', [PostController::class, 'list']);
+    Route::post('/', [PostController::class, 'create']);
     Route::get('/{id}', [PostController::class, 'listById']);
-    Route::get('/{id}', [PostController::class, 'create']);
-    Route::get('/{id}', [PostController::class, 'edit']);
-    Route::get('/{id}', [PostController::class, 'delete']);
+    Route::patch('/{id}', [PostController::class, 'edit']);
+    Route::delete('/{id}', [PostController::class, 'delete']);
+    Route::post('/add-tag/{id}', [PostController::class, 'addTags']);
+});
+
+Route::prefix('tags')->group(function(){
+    Route::get('/', [TagController::class, 'list']);
+    Route::post('/', [TagController::class, 'create']);
+    Route::get('/{id}', [TagController::class, 'listById']);
+    Route::patch('/{id}', [TagController::class, 'edit']);
+    Route::delete('/{id}', [TagController::class, 'delete']);
 });

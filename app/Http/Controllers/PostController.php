@@ -9,7 +9,7 @@ class PostController extends Controller
 {
     public function list()
     {
-        return Post::all();
+        return Post::all()->load('tags');
     }
 
     public function listById(int $id)
@@ -36,5 +36,12 @@ class PostController extends Controller
         $post = Post::find($id);
         $post->delete();
         return response()->json([], 204);
+    }
+
+    public function addTags(Request $req, int $id)
+    {
+        $post = Post::find($id);
+        $post->tags()->attach($req->tags);
+        return response()->json(['data'=>'tag attached with success'], 200);
     }
 }

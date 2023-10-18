@@ -1,5 +1,41 @@
-# Post get all
-http://127.0.0.1:8000/api/posts
-
-# Api
+### Test
 http://127.0.0.1:8000/api/
+
+### Add tag request 
+POST http://127.0.0.1:8000/api/tags
+content-type: application/json
+
+{
+    "name": "Dev"
+}
+
+### Add tag request 
+POST http://127.0.0.1:8000/api/users
+content-type: application/json
+
+{
+    "name": "Ailton",
+    "email": "example@test.com",
+    "password": "asd@123"
+}
+
+### Add post
+POST http://127.0.0.1:8000/api/posts
+content-type: application/json
+
+{
+    "user_id": 1,
+    "title": "Teste",
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam fringilla urna id est euismod, vel congue risus efficitur."
+}
+
+### Add tag to post
+POST http://127.0.0.1:8000/api/posts/add-tag/1
+content-type: application/json
+
+{
+    "tags": "6"
+}
+
+### Get posts
+GET http://127.0.0.1:8000/api/posts
